@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-cairo: 'Cairo', sans-serif;
+  --font-tajawal: 'Tajawal', sans-serif;
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #ffffff;
+  font-family: var(--font-cairo), sans-serif;
+  direction: rtl;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #4a0010;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c9748a;
+}
+
+/* Romantic Glassmorphism */
+.romantic-glass {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(199, 116, 138, 0.15);
+}
+
+.romantic-glass-hover:hover {
+  background: rgba(74, 0, 16, 0.2);
+  border-color: rgba(199, 116, 138, 0.4);
+  box-shadow: 0 0 20px rgba(74, 0, 16, 0.3);
+  transform: translateY(-4px);
+}
+
+/* Gradients */
+.bg-romantic-gradient {
+  background: radial-gradient(circle at center, #4a0010 0%, #0a0a0a 100%);
+}
+
+.bg-burgundy-gold {
+  background: linear-gradient(135deg, #4a0010 0%, #c9748a 100%);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #f5c6d0 0%, #c9748a 50%, #f5c6d0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Hearts Float Animation */
+@keyframes float {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1.2) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.heart-float {
+  position: absolute;
+  bottom: -50px;
+  animation: float 8s infinite linear;
+}
+
+/* Soft pulse */
+@keyframes heartPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.heart-pulse {
+  animation: heartPulse 2s infinite ease-in-out;
+}
