@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { ShoppingBag, Search, Printer, Calendar, Phone, MessageSquare, User } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { ShoppingBag, Search, Printer, Calendar, Phone, MessageSquare, User, Trash2 } from 'lucide-react';
 
 interface OrderItem {
   id: string;
@@ -16,7 +17,9 @@ interface OrdersClientProps {
 }
 
 export default function OrdersClient({ initialOrders }: OrdersClientProps) {
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState('');
+  const [deleteLoadingId, setDeleteLoadingId] = useState<string | null>(null);
 
   // Filter orders based on search query
   const filteredOrders = initialOrders.filter((order) => {
@@ -30,6 +33,30 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm('هل تريد حذف هذا الأوردر بالتأكيد؟')) return;
+    
+    setDeleteLoadingId(id);
+    try {
+      const response = await fetch(`/api/dashboard/orders?id=${id}`, {
+        method: 'DELETE',
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'فشل حذف الأوردر');
+      }
+
+      router.refresh();
+    } catch (err: any) {
+      console.error('Delete order error:', err);
+      alert(err.message || 'حدث خطأ أثناء محاولة حذف الأوردر.');
+    } finally {
+      setDeleteLoadingId(null);
+    }
   };
 
   return (
@@ -162,16 +189,25 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
                       </div>
                     </td>
 
-                    {/* Quick WhatsApp Action (Web only) */}
+                    {/* Quick Actions (Web only) */}
                     <td className="p-4 print:hidden">
-                      <a
-                        href={`https://wa.me/2${order.whatsapp || order.mobile}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-1 px-3 rounded-lg text-xs transition-colors inline-block"
-                      >
-                        مراسلة واتساب
-                      </a>
+                      <div className="flex gap-2">
+                        <a
+                          href={`https://wa.me/2${order.whatsapp || order.mobile}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-1 px-3 rounded-lg text-xs transition-colors inline-block"
+                        >
+                          مراسلة واتساب
+                        </a>
+                        <button
+                          onClick={() => handleDelete(order.id)}
+                          disabled={deleteLoadingId === order.id}
+                          className="bg-[#ff003c]/10 hover:bg-[#ff003c]/20 text-[#ff003c] font-bold py-1 px-2.5 rounded-lg text-xs border border-[#ff003c]/20 transition-all disabled:opacity-50"
+                        >
+                          حذف
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
