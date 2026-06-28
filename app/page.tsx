@@ -251,7 +251,7 @@ export default async function LandingPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative max-w-3xl mx-auto">
             {/* Step 1 */}
             <div className="text-center space-y-4 relative">
               <div className="w-16 h-16 rounded-full bg-romantic-burgundy/80 flex items-center justify-center mx-auto text-xl font-bold border-2 border-romantic-rosegold/40 shadow-lg text-white">
@@ -259,7 +259,7 @@ export default async function LandingPage() {
               </div>
               <h3 className="text-lg font-bold text-white">اطلب الخدمة</h3>
               <p className="text-xs md:text-sm text-romantic-pink/70 leading-relaxed px-4">
-                املأ استمارة الطلب بالأسفل ببياناتك وسنقوم باستلام طلبك فوراً.
+                اضغط على زر احجز هديتك الآن واملأ استمارة الطلب ببياناتك وسنقوم باستلام طلبك فوراً.
               </p>
             </div>
 
@@ -267,17 +267,6 @@ export default async function LandingPage() {
             <div className="text-center space-y-4 relative">
               <div className="w-16 h-16 rounded-full bg-romantic-burgundy/80 flex items-center justify-center mx-auto text-xl font-bold border-2 border-romantic-rosegold/40 shadow-lg text-white">
                 ٢
-              </div>
-              <h3 className="text-lg font-bold text-white">تواصل وتخصيص</h3>
-              <p className="text-xs md:text-sm text-romantic-pink/70 leading-relaxed px-4">
-                سنتواصل معك فوراً عبر الواتساب لتسلم الصور، الأغاني المفضلة، ورسائلك التي تريد كتابتها.
-              </p>
-            </div>
-
-            {/* Step 3 */}
-            <div className="text-center space-y-4 relative">
-              <div className="w-16 h-16 rounded-full bg-romantic-burgundy/80 flex items-center justify-center mx-auto text-xl font-bold border-2 border-romantic-rosegold/40 shadow-lg text-white">
-                ٣
               </div>
               <h3 className="text-lg font-bold text-white">استلم صفحتكما</h3>
               <p className="text-xs md:text-sm text-romantic-pink/70 leading-relaxed px-4">
