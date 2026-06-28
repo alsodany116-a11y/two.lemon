@@ -89,7 +89,7 @@ export async function verifyToken(token: string): Promise<AdminSession | null> {
     );
     
     const signatureBuffer = base64UrlToBuffer(signature);
-    const isValid = await crypto.subtle.verify('HMAC', cryptoKey, signatureBuffer, dataToVerify);
+    const isValid = await crypto.subtle.verify('HMAC', cryptoKey, signatureBuffer as any, dataToVerify as any);
     
     if (!isValid) return null;
     
