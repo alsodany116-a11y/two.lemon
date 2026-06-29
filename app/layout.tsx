@@ -95,6 +95,26 @@ export default async function RootLayout({
       </head>
       <body className="bg-romantic-gradient min-h-screen flex flex-col font-cairo">
         <main className="flex-grow">{children}</main>
+
+        {/* Service Worker Registration Script for PWA */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js').then(
+                    function(reg) {
+                      console.log('ServiceWorker registered with scope:', reg.scope);
+                    },
+                    function(err) {
+                      console.error('ServiceWorker registration failed:', err);
+                    }
+                  );
+                });
+              }
+            `
+          }}
+        />
       </body>
     </html>
   );
