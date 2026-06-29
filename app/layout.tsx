@@ -51,6 +51,13 @@ export default async function RootLayout({
   return (
     <html lang="ar" dir="rtl" className="scroll-smooth">
       <head>
+        {/* PWA / iOS Web App Meta Tags */}
+        <meta name="theme-color" content="#4a0010" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="ذكريات الحب" />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
+
         {/* Google Fonts Preconnect */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
