@@ -14,9 +14,10 @@ interface OrderItem {
 
 interface OrdersClientProps {
   initialOrders: OrderItem[];
+  price?: number;
 }
 
-export default function OrdersClient({ initialOrders }: OrdersClientProps) {
+export default function OrdersClient({ initialOrders, price = 80 }: OrdersClientProps) {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState('');
   const [deleteLoadingId, setDeleteLoadingId] = useState<string | null>(null);
@@ -88,7 +89,7 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
         <div className="bg-[#18080c] border border-romantic-border/40 p-5 rounded-2xl">
           <span className="text-xs text-romantic-pink/60 block">إجمالي المبيعات</span>
           <span className="text-2xl font-black text-white mt-1 block">
-            {initialOrders.length * 170} جنيه
+            {initialOrders.length * price} جنيه
           </span>
         </div>
         <div className="bg-[#18080c] border border-romantic-border/40 p-5 rounded-2xl">
@@ -100,7 +101,7 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
         <div className="bg-[#18080c] border border-romantic-border/40 p-5 rounded-2xl">
           <span className="text-xs text-romantic-pink/60 block">متوسط السعر للطلب</span>
           <span className="text-2xl font-black text-white mt-1 block">
-            170 جنيه
+            {price} جنيه
           </span>
         </div>
       </div>

@@ -10,6 +10,7 @@ interface SettingsClientProps {
   initialThankYou: string;
   initialThankYouStep1: string;
   initialThankYouStep2: string;
+  initialPrice: string;
 }
 
 export default function SettingsClient({
@@ -18,6 +19,7 @@ export default function SettingsClient({
   initialThankYou,
   initialThankYouStep1,
   initialThankYouStep2,
+  initialPrice,
 }: SettingsClientProps) {
   const router = useRouter();
 
@@ -27,6 +29,7 @@ export default function SettingsClient({
   const [thankYou, setThankYou] = useState(initialThankYou);
   const [thankYouStep1, setThankYouStep1] = useState(initialThankYouStep1);
   const [thankYouStep2, setThankYouStep2] = useState(initialThankYouStep2);
+  const [price, setPrice] = useState(initialPrice);
   
   const [generalLoading, setGeneralLoading] = useState(false);
   const [generalSuccess, setGeneralSuccess] = useState('');
@@ -61,6 +64,7 @@ export default function SettingsClient({
             thank_you_message: thankYou,
             thank_you_step1: thankYouStep1,
             thank_you_step2: thankYouStep2,
+            website_price: price,
           },
         }),
       });
@@ -166,6 +170,22 @@ export default function SettingsClient({
                   {generalSuccess}
                 </div>
               )}
+
+              {/* Website Price Input */}
+              <div>
+                <label className="block text-xs font-semibold text-romantic-pink/80 mb-2">
+                  سعر الخدمة بالموقع (بالجنيه المصري)
+                </label>
+                <input
+                  type="number"
+                  required
+                  min={1}
+                  placeholder="80"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  className="w-full bg-[#110508]/85 border border-romantic-border/50 focus:border-romantic-rosegold focus:outline-none text-white px-3 py-2.5 rounded-xl text-xs ltr text-left font-bold"
+                />
+              </div>
 
               {/* Countdown Target Input */}
               <div>

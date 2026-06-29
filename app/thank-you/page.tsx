@@ -26,6 +26,7 @@ export default async function ThankYouPage({ searchParams }: ThankYouProps) {
   let thankYouMessage = 'سعداء جداً بكوننا جزءاً من توثيق ذكرياتكما الرومانسية! سيقوم فريقنا بالتواصل معك عبر الواتساب خلال 24 ساعة لبدء تصميم هديتك المميّزة. ❤️';
   let thankYouStep1 = 'سنقوم بالتواصل معك عبر الواتساب على الرقم المرفق بالطلب خلال 24 ساعة كحد أقصى.';
   let thankYouStep2 = 'سنسلمك رابط صفحتكما الخاصة والرقم السري الخاص بها، لتفاجئ بها شريك حياتك بهدية لا تُنسى!';
+  let websitePrice = '80';
   let pixelId = '';
   let accessToken = '';
   let testCode = '';
@@ -44,6 +45,7 @@ export default async function ThankYouPage({ searchParams }: ThankYouProps) {
           'thank_you_message',
           'thank_you_step1',
           'thank_you_step2',
+          'website_price',
           'pixel_id',
           'pixel_access_token',
           'pixel_test_code'
@@ -66,6 +68,9 @@ export default async function ThankYouPage({ searchParams }: ThankYouProps) {
 
       const dbStep2 = settingsRes.data.find((s) => s.key === 'thank_you_step2')?.value;
       if (dbStep2) thankYouStep2 = dbStep2;
+
+      const dbPrice = settingsRes.data.find((s) => s.key === 'website_price')?.value;
+      if (dbPrice) websitePrice = dbPrice;
 
       pixelId = settingsRes.data.find((s) => s.key === 'pixel_id')?.value || '';
       accessToken = settingsRes.data.find((s) => s.key === 'pixel_access_token')?.value || '';
@@ -96,7 +101,7 @@ export default async function ThankYouPage({ searchParams }: ThankYouProps) {
       ip: ip.split(',')[0].trim(),
       userAgent,
       customData: {
-        value: 170,
+        value: Number(websitePrice) || 80,
         currency: 'EGP',
       },
     }).catch((err) => {
@@ -117,7 +122,7 @@ export default async function ThankYouPage({ searchParams }: ThankYouProps) {
               if (window.fbq) {
                 console.log('Firing browser Pixel Purchase event with ID: ${eventId}');
                 fbq('track', 'Purchase', {
-                  value: 170,
+                  value: ${Number(websitePrice) || 80},
                   currency: 'EGP'
                 }, { event_id: '${eventId}' });
               }
@@ -161,7 +166,7 @@ export default async function ThankYouPage({ searchParams }: ThankYouProps) {
             <CreditCard className="w-5 h-5 text-romantic-rosegold shrink-0" />
             <div>
               <span className="block text-xs text-romantic-pink/50">المبلغ المدفوع</span>
-              <span className="font-bold text-white text-base">170 جنيه</span>
+              <span className="font-bold text-white text-base">{websitePrice} جنيه</span>
             </div>
           </div>
           <div className="bg-romantic-card/60 border border-romantic-border/30 p-4 rounded-xl flex items-center gap-3">

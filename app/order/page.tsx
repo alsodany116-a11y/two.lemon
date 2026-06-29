@@ -1,9 +1,24 @@
 import OrderForm from '@/components/order-form';
 import { Heart } from 'lucide-react';
+import { supabaseAdmin } from '@/lib/supabase';
 
 export const revalidate = 0; // Dynamic rendering
 
-export default function OrderPage() {
+export default async function OrderPage() {
+  let websitePrice = '80';
+  try {
+    const { data } = await supabaseAdmin
+      .from('settings')
+      .select('value')
+      .eq('key', 'website_price')
+      .single();
+    if (data && data.value) {
+      websitePrice = data.value;
+    }
+  } catch (error) {
+    console.error('Error fetching website_price in order page:', error);
+  }
+
   return (
     <div className="relative min-h-screen text-white bg-romantic-gradient selection:bg-romantic-rosegold py-12 px-4 flex flex-col justify-center items-center">
       
@@ -34,7 +49,7 @@ export default function OrderPage() {
         <div className="bg-[#110508]/80 border border-romantic-border/50 p-4 rounded-2xl text-center space-y-1">
           <span className="text-romantic-pink/40 line-through text-xs md:text-sm block">380 جنيه</span>
           <span className="text-2xl font-black text-white block">
-            170 جنيه فقط
+            {websitePrice} جنيه فقط
           </span>
           <span className="text-[10px] text-romantic-rosegold font-bold uppercase tracking-wider block">
             خصم لفترة محدودة جداً! 🏷️

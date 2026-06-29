@@ -73,6 +73,12 @@ INSERT INTO public.settings (key, value) VALUES
 ON CONFLICT (key) DO NOTHING;
 
 INSERT INTO public.settings (key, value) VALUES
+('website_price', '80')
+ON CONFLICT (key) DO NOTHING;
+
+
+
+INSERT INTO public.settings (key, value) VALUES
 ('pixel_id', '')
 ON CONFLICT (key) DO NOTHING;
 

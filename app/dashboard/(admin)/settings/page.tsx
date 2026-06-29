@@ -9,6 +9,7 @@ export default async function SettingsDashboard() {
   let thankYou = 'سعداء جداً بكوننا جزءاً من توثيق ذكرياتكما الرومانسية...';
   let thankYouStep1 = 'سنقوم بالتواصل معك عبر الواتساب على الرقم المرفق بالطلب خلال 24 ساعة كحد أقصى.';
   let thankYouStep2 = 'سنسلمك رابط صفحتكما الخاصة والرقم السري الخاص بها، لتفاجئ بها شريك حياتك بهدية لا تُنسى!';
+  let price = '80';
 
   try {
     const { data: settingsData } = await supabaseAdmin
@@ -19,7 +20,8 @@ export default async function SettingsDashboard() {
         'website_details',
         'thank_you_message',
         'thank_you_step1',
-        'thank_you_step2'
+        'thank_you_step2',
+        'website_price'
       ]);
 
     if (settingsData) {
@@ -37,6 +39,9 @@ export default async function SettingsDashboard() {
 
       const dbStep2 = settingsData.find((s) => s.key === 'thank_you_step2')?.value;
       if (dbStep2) thankYouStep2 = dbStep2;
+
+      const dbPrice = settingsData.find((s) => s.key === 'website_price')?.value;
+      if (dbPrice) price = dbPrice;
     }
   } catch (error) {
     console.error('Error fetching settings for settings page:', error);
@@ -49,6 +54,7 @@ export default async function SettingsDashboard() {
       initialThankYou={thankYou}
       initialThankYouStep1={thankYouStep1}
       initialThankYouStep2={thankYouStep2}
+      initialPrice={price}
     />
   );
 }

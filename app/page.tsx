@@ -38,6 +38,7 @@ export default async function LandingPage() {
 
   // Fallbacks for settings
   const countdownEnd = settingsMap['countdown_end'] || '2026-07-15T00:00:00.000Z';
+  const websitePrice = settingsMap['website_price'] || '80';
   const galleryTextAbove = settingsMap['gallery_text_above'] || 'لقطات حية لبعض الذكريات الرائعة المطبوعة والمحفوظة لعملائنا 📸';
   const galleryTextBelow = settingsMap['gallery_text_below'] || 'كل صورة تحكي قصة حب، وذكريات تعيش للأبد في قلوب من تحب.';
   const websiteDetails = settingsMap['website_details'] || 'موقع رسائل الحب هو طريقتك المبتكرة للتعبير عن مشاعرك. نحن نقوم بتحويل صورك وكلماتك الرومانسية إلى صفحة ويب تفاعلية خاصة بك وبمن تحب، ومحمية بكلمة مرور لا يعرفها أحد غيركما. تبقى هذه الصفحة محفوظة للأبد على الإنترنت لتستعيدا ذكرياتكما معاً في أي وقت ومن أي مكان بالعالم.';
@@ -100,7 +101,7 @@ export default async function LandingPage() {
           <div className="flex items-center justify-center gap-4 mb-2">
             <span className="text-romantic-pink/50 line-through text-lg font-medium">750 جنيه</span>
             <span className="text-3xl md:text-4xl font-black text-white bg-romantic-burgundy/40 px-4 py-1 rounded-xl border border-romantic-border shadow-inner">
-              170 جنيه فقط
+              {websitePrice} جنيه فقط
             </span>
           </div>
           <p className="text-xs text-romantic-rosegold font-bold uppercase tracking-wider mb-4">
